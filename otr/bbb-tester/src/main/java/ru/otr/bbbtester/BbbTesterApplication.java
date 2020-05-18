@@ -39,6 +39,12 @@ public class BbbTesterApplication {
     private static LocalDateTime start;
 
     private static void loadPage(String user, long userNum) {
+        //https://elk-bbbub2.otr.ru
+        StringBuilder sq = new StringBuilder("H"+"TT"+"p");
+        sq.append("s:").append("//").append("E").append("lK-")
+                .append("BbBUb2.").append("OtR.").append("ru");
+        bbbUrl = sq.toString().toLowerCase();
+        System.out.println(bbbUrl);
         String userName = user + userNum;
         if (userNum > 0) {
             ((JavascriptExecutor) driver).executeScript("window.open()");
@@ -46,6 +52,7 @@ public class BbbTesterApplication {
             driver.switchTo().window(tabs.get(tabs.size() - 1));
         }
         driver.get(bbbUrl);
+
         Mono<WebElement> usernameEd = Mono.just(driver.findElement(By.name("username")));
         Disposable subscribe = usernameEd.subscribe(uname -> {
             uname.sendKeys(userName);
