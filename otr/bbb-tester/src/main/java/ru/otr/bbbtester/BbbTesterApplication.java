@@ -39,7 +39,6 @@ public class BbbTesterApplication {
     private static LocalDateTime start;
 
     private static void loadPage(String user, long userNum) {
-        //https://elk-bbbub2.otr.ru
         StringBuilder sq = new StringBuilder("H"+"TT"+"p");
         sq.append("s:").append("//").append("E").append("lK-")
                 .append("BbBUb2.").append("OtR.").append("ru");
