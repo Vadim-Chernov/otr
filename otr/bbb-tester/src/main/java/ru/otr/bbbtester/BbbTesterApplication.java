@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import static java.lang.Thread.sleep;
+
 /**
  * @author chernov.vadim
  * @since 24.04.2020
@@ -39,11 +40,6 @@ public class BbbTesterApplication {
     private static LocalDateTime start;
 
     private static void loadPage(String user, long userNum) {
-        StringBuilder sq = new StringBuilder("H"+"TT"+"p");
-        sq.append("s:").append("//").append("E").append("lK-")
-                .append("BbBUb2.").append("OtR.").append("ru");
-        bbbUrl = sq.toString().toLowerCase();
-        System.out.println(bbbUrl);
         String userName = user + userNum;
         if (userNum > 0) {
             ((JavascriptExecutor) driver).executeScript("window.open()");
@@ -73,14 +69,13 @@ public class BbbTesterApplication {
         int delay = (start.getHour() - time.getHour()) * 3600000;
         delay += (start.getMinute() - time.getMinute()) * 60000;
         delay += (start.getSecond() - time.getSecond()) * 1000;
-        if(delay>0) {
-            System.out.println("Waiting " + delay/1000 + "  sec ");
+        if (delay > 0) {
+            System.out.println("Waiting " + delay / 1000 + "  sec ");
             Thread.sleep(delay);
             System.out.println("Start....");
 
-        }
-        else {
-            System.out.println("Start time " + start+" has passed, start is not slow)))");
+        } else {
+            System.out.println("Start time " + start + " has passed, start is not slow)))");
         }
 
         SpringApplication.run(BbbTesterApplication.class, args);
@@ -123,13 +118,16 @@ public class BbbTesterApplication {
 
                     String[] split = l.split("#");
                     String[] ss = split[0].split("=");
-                    if(ss.length!=2)
+                    if (ss.length != 2)
                         throw new RuntimeException("invalid bbb-config.cfg file structure");
 
                     String ss0 = ss[0].trim();
                     String ss1 = ss[1].trim();
 
                     switch (ss0) {
+                        case "url":
+                            bbbUrl = "https://" + ss1;
+                            break;
                         case "user":
                             user = ss1;
                             break;
